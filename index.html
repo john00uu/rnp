@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RNP Tracker</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/frontend/css/style.css">
+</head>
+<body>
+    <!-- Rotating Logo (Initially Visible) -->
+    <div class="logo-container" id="logo-container" aria-label="Loading application">
+        <div class="logo" role="progressbar" aria-busy="true"></div>
+    </div>
+
+    <!-- Content Section (Initially Hidden) -->
+    <div id="content" style="display: none;" class="container-fluid py-4">
+        <header class="mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="mb-0">RNP Tracker</h4>
+                <div class="d-flex align-items-center">
+                    <button id="refresh-data" class="btn btn-outline-secondary me-2" title="Refresh Data">
+                        <i class="bi bi-arrow-clockwise"></i>
+                    </button>
+                    <div class="form-check form-switch ms-2">
+                        <input class="form-check-input" type="checkbox" id="auto-refresh-toggle">
+                        <label class="form-check-label" for="auto-refresh-toggle">Auto Refresh</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" id="data-search" class="search-input" placeholder="Search data..." aria-label="Search data">
+            </div>
+        </header>
+        
+        <!-- Column Selector Section -->
+        <div class="column-selector-container mb-4">
+            <div class="selector-header" id="selector-header">
+                <h6 class="mb-0">Select Columns to Display</h6>
+                <button class="toggle-selector" id="toggle-selector" aria-expanded="false" aria-controls="selector-content">
+                    <i class="bi bi-chevron-down"></i>
+                    <span class="visually-hidden">Toggle column selector</span>
+                </button>
+            </div>
+            
+            <div class="selector-content" id="selector-content" style="display: none;">
+                <input type="text" id="column-search" class="form-control mb-3" placeholder="Search columns..." aria-label="Search columns">
+                
+                <div class="column-selector-buttons">
+                    <button id="select-all-columns" class="btn btn-outline-secondary btn-sm">Select All</button>
+                    <button id="deselect-all-columns" class="btn btn-outline-secondary btn-sm">Deselect All</button>
+                    <button id="reset-default-columns" class="btn btn-outline-secondary btn-sm">Reset to Default</button>
+                </div>
+                
+                <div class="column-selector-wrapper">
+                    <div id="column-groups-container">
+                        <!-- Column groups will be added here -->
+                    </div>
+                    <div id="column-selector" class="column-grid">
+                        <!-- Checkboxes will be dynamically added here -->
+                    </div>
+                </div>
+                
+                <div class="selected-columns-summary" id="selected-columns-summary">
+                    Selected: <span id="selected-count">0</span> of <span id="total-count">0</span> columns
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Section -->
+        <div class="position-relative">
+            <div class="table-container" tabindex="0">
+                <table class="table table-hover">
+                    <thead>
+                        <tr id="table-head">
+                            <!-- Table headers will be dynamically populated -->
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <!-- Table body will be dynamically populated -->
+                    </tbody>
+                </table>
+                <div id="page-loading" class="page-loading">Loading more data...</div>
+            </div>
+        </div>
+        
+        <div class="d-flex justify-content-between align-items-center mt-3">
+            <div class="table-info">
+                Showing <span id="visible-rows">0</span> of <span id="total-rows">0</span> records
+            </div>
+            <div class="page-controls">
+                <button id="load-more" class="btn btn-outline-primary btn-sm">Load More</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fixed Navigation Controls -->
+    <div class="table-navigation">
+        <button class="nav-button" id="nav-left" aria-label="Scroll left">
+            <i class="bi bi-arrow-left"></i>
+        </button>
+        <button class="nav-button" id="nav-right" aria-label="Scroll right">
+            <i class="bi bi-arrow-right"></i>
+        </button>
+        <button class="nav-button" id="nav-up" aria-label="Scroll up">
+            <i class="bi bi-arrow-up"></i>
+        </button>
+        <button class="nav-button" id="nav-down" aria-label="Scroll down">
+            <i class="bi bi-arrow-down"></i>
+        </button>
+    </div>
+
+    <!-- Details Modal -->
+    <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailsModalLabel">Site Information</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <!-- Row details will be loaded here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Loading Indicator -->
+    <div class="loading-indicator" id="loading-indicator" role="status" aria-live="polite">Loading...</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/frontend/js/script.js"></script>
+</body>
+</html>
