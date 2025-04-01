@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>azerconnect - Data Management Platform</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-container">
+                <img src="/static/AZC.png" alt="azerconnect Logo" class="logo">
+                <h1 class="company-name">azerconnect <span>GROUP</span></h1>
+            </div>
+            
+            <div class="header-controls">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="globalSearch" placeholder="Search in all data...">
+                    <div class="search-options">
+                        <button id="advancedSearchBtn"><i class="fas fa-sliders-h"></i></button>
+                    </div>
+                </div>
+                
+                <div class="user-controls">
+                    <button id="themeToggle" class="theme-toggle">
+                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="user-profile">
+                        <span id="username">User</span>
+                        <img src="/static/AZC.png" alt="User Avatar">
+                        <div class="user-dropdown">
+                            <a href="#"><i class="fas fa-user-cog"></i> Profile</a>
+                            <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Overview -->
+            <section class="dashboard-overview">
+                <div class="overview-header">
+                    <h2>Network Infrastructure Dashboard</h2>
+                    <p>Manage and analyze your network infrastructure data</p>
+                </div>
+                
+                <div class="overview-cards">
+                    <div class="overview-card">
+                        <div class="card-icon">
+                            <i class="fas fa-broadcast-tower"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Total Sites</h3>
+                            <p id="totalSites">Loading...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="overview-card">
+                        <div class="card-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Regions</h3>
+                            <p id="totalRegions">Loading...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="overview-card">
+                        <div class="card-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Planning Status</h3>
+                            <p id="planningStatus">Loading...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="overview-card">
+                        <div class="card-icon">
+                            <i class="fas fa-signal"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Network Coverage</h3>
+                            <p id="networkCoverage">Loading...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="network-map">
+                    <div class="map-container" id="networkMapContainer">
+                        <!-- Map will be rendered here -->
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Data Grid Controls -->
+            <section class="data-grid-controls">
+                <div class="controls-left">
+                    <div class="column-selector">
+                        <button id="columnSelectorBtn">
+                            <i class="fas fa-columns"></i>
+                            <span>Select Columns</span>
+                        </button>
+                        <div class="column-dropdown" id="columnDropdown">
+                            <div class="column-search">
+                                <input type="text" placeholder="Search columns...">
+                            </div>
+                            <div class="column-list" id="columnList">
+                                <!-- Column checkboxes will be added here -->
+                            </div>
+                            <div class="column-actions">
+                                <button id="saveColumnsBtn">Save as Default</button>
+                                <button id="resetColumnsBtn">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="advanced-search" id="advancedSearchPanel">
+                        <div class="search-header">
+                            <h3>Advanced Search</h3>
+                            <button id="closeAdvancedSearch"><i class="fas fa-times"></i></button>
+                        </div>
+                        <div class="search-body">
+                            <div class="search-field">
+                                <label>Search Term</label>
+                                <input type="text" id="searchTerm" placeholder="Enter search term...">
+                            </div>
+                            <div class="search-field">
+                                <label>Search In</label>
+                                <div class="search-columns" id="searchColumns">
+                                    <!-- Search column options will be added here -->
+                                </div>
+                            </div>
+                            <div class="search-actions">
+                                <button id="applySearchBtn">Apply</button>
+                                <button id="clearSearchBtn">Clear</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="controls-right">
+                    <button id="importBtn" class="action-button">
+                        <i class="fas fa-file-import"></i>
+                        <span>Import</span>
+                    </button>
+                    <button id="exportBtn" class="action-button">
+                        <i class="fas fa-file-export"></i>
+                        <span>Export</span>
+                    </button>
+                    <button id="editModeBtn" class="action-button">
+                        <i class="fas fa-edit"></i>
+                        <span>Edit Mode</span>
+                    </button>
+                </div>
+            </section>
+            
+            <!-- Data Grid -->
+            <section class="data-grid-section">
+                <div class="data-grid-container">
+                    <table class="data-grid" id="dataGrid">
+                        <thead id="dataGridHeader">
+                            <!-- Table headers will be added here -->
+                        </thead>
+                        <tbody id="dataGridBody">
+                            <!-- Table rows will be added here -->
+                        </tbody>
+                    </table>
+                    
+                    <div class="loading-indicator" id="loadingIndicator">
+                        <div class="spinner"></div>
+                        <p>Loading data...</p>
+                    </div>
+                    
+                    <div class="no-data-message" id="noDataMessage">
+                        <i class="fas fa-database"></i>
+                        <p>No data available</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2025 azerconnect Group RNP FP. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Modals -->
+    <div class="modal" id="importModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Import Data</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Select an Excel or CSV file to import:</p>
+                <form id="importForm">
+                    <div class="file-upload">
+                        <input type="file" id="importFile" accept=".xlsx,.xls,.csv">
+                        <label for="importFile">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Choose a file</span>
+                        </label>
+                        <p class="file-name" id="fileName">No file selected</p>
+                    </div>
+                    <div class="import-progress" id="importProgress">
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <p class="progress-text">0%</p>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="submit" id="submitImportBtn">Import</button>
+                        <button type="button" class="cancel-btn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="rowDetailsModal">
+        <div class="modal-content large-modal">
+            <div class="modal-header">
+                <h2>Row Details</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row-details" id="rowDetailsContent">
+                    <!-- Row details will be added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast">
+        <div class="toast-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="toast-content">
+            <p class="toast-message">Operation completed successfully</p>
+        </div>
+        <button class="toast-close">&times;</button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
